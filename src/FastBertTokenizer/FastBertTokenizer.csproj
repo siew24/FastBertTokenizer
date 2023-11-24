@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -10,13 +11,13 @@
     <PackageId>FastBertTokenizer</PackageId>
     <RootNamespace>FastBertTokenizer</RootNamespace>
     <AssemblyName>FastBertTokenizer</AssemblyName>
-    <Authors>Georg Jung</Authors>
+    <Authors>Georg Jung, siew24</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
 
     <PackageTags>bert;tokenizer;wordpiece;llm;semantic-kernel;performance;ai;artificial-intelligence;ml;machine-learning</PackageTags>
-    <PackageProjectUrl>https://github.com/georg-jung/FastBertTokenizer</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/siew24/FastBertTokenizer</PackageProjectUrl>
     <PackageDescription>
-Fast and memory-efficient WordPiece tokenizer as it is used by BERT and others. Tokenizes text for further processing using NLP/language models.
+Fast and memory-efficient WordPiece tokenizer as it is used by BERT and others. Tokenizes text for further processing using NLP/language models. This fork only supports .NET Standard 2.1
     </PackageDescription>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -24,7 +25,11 @@ Fast and memory-efficient WordPiece tokenizer as it is used by BERT and others. 
 
   <ItemGroup>
     <None Include="../../logo.png" Pack="true" PackagePath="/icon.png" />
-    <None Include="../../README.md" Pack="true" PackagePath="/"/>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NStack.Core" />
   </ItemGroup>
 
 </Project>

@@ -306,11 +306,28 @@
         "resolved": "4.5.4",
         "contentHash": "zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg=="
       },
+      "System.ValueTuple": {
+        "type": "Transitive",
+        "resolved": "4.5.0",
+        "contentHash": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ=="
+      },
       "fastberttokenizer": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "NStack.Core": "[1.0.7, )"
+        }
       },
       "rustlibwrapper": {
         "type": "Project"
+      },
+      "NStack.Core": {
+        "type": "CentralTransitive",
+        "requested": "[1.0.7, )",
+        "resolved": "1.0.7",
+        "contentHash": "eqvSscta9zPXMOLRDdYf/6FloygLC9ejZlGoLiejn9XZHxVuGYnSoPzb5YBrgyMih/0yfVejreRmJTUQ64sYew==",
+        "dependencies": {
+          "System.ValueTuple": "4.5.0"
+        }
       }
     }
   }

@@ -1,46 +1,50 @@
 // Copyright (c) Georg Jung. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-namespace FastBertTokenizer;
-
-public partial class BertTokenizer
+namespace FastBertTokenizer
 {
-    private Dictionary<long, string>? _decodePrefixes;
-    private Dictionary<long, string>? _decodeSuffixes;
-
-    public string Decode(ReadOnlySpan<long> tokenIds)
+    public partial class BertTokenizer
     {
-        _ = _prefixes ?? throw new InvalidOperationException("Vocabulary not loaded.");
-        _ = _suffixes ?? throw new InvalidOperationException("Vocabulary not loaded.");
+        private Dictionary<long, string>? _decodePrefixes;
+        private Dictionary<long, string>? _decodeSuffixes;
 
-        _decodeSuffixes ??= _suffixes.ToDictionary(x => x.Value, x => x.Key);
-        if (_decodePrefixes is null)
+        public string Decode(ReadOnlySpan<long> tokenIds)
         {
-            _decodePrefixes = _prefixes.ToDictionary(x => x.Value, x => x.Key);
-            _decodePrefixes.Add(_unk.Id, _unk.Token);
-            _decodePrefixes.Add(_cls.Id, _cls.Token);
-            _decodePrefixes.Add(_sep.Id, _sep.Token);
-            _decodePrefixes.Add(_pad.Id, _pad.Token);
-        }
+            _ = _prefixes ?? throw new InvalidOperationException("Vocabulary not loaded.");
+            _ = _suffixes ?? throw new InvalidOperationException("Vocabulary not loaded.");
 
-        var sb = new StringBuilder();
-        sb.Append(_decodePrefixes[tokenIds[0]]);
-        foreach (var id in tokenIds.Slice(1))
-        {
-            if (_decodePrefixes.TryGetValue(id, out var prefix))
+            _decodeSuffixes ??= _suffixes.ToDictionary(x => x.Value, x => x.Key);
+            if (_decodePrefixes is null)
             {
-                sb.Append(' ');
-                sb.Append(prefix);
+                _decodePrefixes = _prefixes.ToDictionary(x => x.Value, x => x.Key);
+                _decodePrefixes.Add(_unk.Id, _unk.Token);
+                _decodePrefixes.Add(_cls.Id, _cls.Token);
+                _decodePrefixes.Add(_sep.Id, _sep.Token);
+                _decodePrefixes.Add(_pad.Id, _pad.Token);
             }
 
-            if (_decodeSuffixes.TryGetValue(id, out var suffix))
+            var sb = new StringBuilder();
+            sb.Append(_decodePrefixes[tokenIds[0]]);
+            foreach (var id in tokenIds.Slice(1))
             {
-                sb.Append(suffix);
-            }
-        }
+                if (_decodePrefixes.TryGetValue(id, out var prefix))
+                {
+                    sb.Append(' ');
+                    sb.Append(prefix);
+                }
 
-        return sb.ToString();
+                if (_decodeSuffixes.TryGetValue(id, out var suffix))
+                {
+                    sb.Append(suffix);
+                }
+            }
+
+            return sb.ToString();
+        }
     }
 }
