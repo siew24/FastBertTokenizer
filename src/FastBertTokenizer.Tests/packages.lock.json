@@ -1144,7 +1144,7 @@
           "xunit.extensibility.core": "[2.5.0]"
         }
       },
-      "fastberttokenizer": {
+      "PortedFastBertTokenizer": {
         "type": "Project",
         "dependencies": {
           "NStack.Core": "[1.0.7, )"

@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>FastBertTokenizer</PackageId>
+    <PackageId>PortedFastBertTokenizer</PackageId>
     <RootNamespace>FastBertTokenizer</RootNamespace>
     <AssemblyName>FastBertTokenizer</AssemblyName>
     <Authors>Georg Jung, siew24</Authors>
